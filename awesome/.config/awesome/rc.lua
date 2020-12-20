@@ -55,7 +55,7 @@ beautiful.init(gears.filesystem.get_themes_dir() .. "default/theme.lua")
 
 -- This is used later as the default terminal and editor to run.
 terminal = "alacritty"
-editor = os.getenv("nvim") or "vi"
+editor = os.getenv("vim") or "vi"
 editor_cmd = terminal .. " -e " .. editor
 
 -- Default modkey.
@@ -69,17 +69,17 @@ modkey = "Mod4"
 awful.layout.layouts = {
     awful.layout.suit.spiral.dwindle,
     awful.layout.suit.floating,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.spiral,
-    awful.layout.suit.max,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.magnifier,
-    awful.layout.suit.corner.nw,
+    -- awful.layout.suit.tile,
+    -- awful.layout.suit.tile.left,
+    -- awful.layout.suit.tile.bottom,
+    -- awful.layout.suit.tile.top,
+    -- awful.layout.suit.fair,
+    -- awful.layout.suit.fair.horizontal,
+    -- awful.layout.suit.spiral,
+    -- awful.layout.suit.max,
+    -- awful.layout.suit.max.fullscreen,
+    -- awful.layout.suit.magnifier,
+    -- awful.layout.suit.corner.nw,
     -- awful.layout.suit.corner.ne,
     -- awful.layout.suit.corner.sw,
     -- awful.layout.suit.corner.se,
@@ -258,7 +258,7 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioPrev", function () awful.spawn("sp prev") end, 
         {description = "spotify prev", group = "audio"}),
 
-    awful.key({ modkey,           }, "e",      function() awful.spawn("alacritty -e vifm") end,
+    awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
               {description="run vifm", group="awesome"}),
     awful.key({ modkey }, "l", function() awful.spawn("slock") end, 
               {description = "lock screen", group = "awesome"}),
@@ -371,6 +371,8 @@ clientkeys = gears.table.join(
     awful.key({ modkey,           }, "f",
         function (c)
             c.fullscreen = not c.fullscreen
+            s = awful.screen.focused()
+            s.mywibox.visible = not s.mywibox.visible
             c:raise()
         end,
         {description = "toggle fullscreen", group = "client"}),
@@ -491,7 +493,7 @@ awful.rules.rules = {
                      keys = clientkeys,
                      buttons = clientbuttons,
                      screen = awful.screen.preferred,
-                     placement = awful.placement.no_overlap+awful.placement.no_offscreen
+                     placement = awful.placement.no_overlap+awful.placement.no_offscreen,
      }
     },
 
@@ -528,7 +530,7 @@ awful.rules.rules = {
 
     -- Add titlebars to normal clients and dialogs
     { rule_any = {type = { "normal", "dialog" }
-      }, properties = { titlebars_enabled = true }
+      }, properties = { titlebars_enabled = false }
     },
 
     -- Set Firefox to always map on the tag named "2" on screen 1.
@@ -543,7 +545,6 @@ client.connect_signal("manage", function (c)
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- if not awesome.startup then awful.client.setslave(c) end
-
     if awesome.startup
       and not c.size_hints.user_position
       and not c.size_hints.program_position then
@@ -599,7 +600,46 @@ end)
 
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
--- }}}
+client.border_width=10;
 -- Autostart
-awful.spawn.once("nitrogen --restore")
 awful.spawn.once("compton --detect-client-opacity -i 1")
+awful.spawn.once("nm-applet")
+awful.spawn.with_shell("~/.fehbg &")
+
+beautiful.useless_gap = 3
+
+-- Toggle titlebar when floating
+local function titlebar_for_floating_client(c)
+    if c.floating and not (c.requests_no_titlebar or c.fullscreen) then
+        c:emit_signal("request::titlebars")
+    else
+        local t = c:tags()[1]
+        if t and t.layout.name == "floating" then
+            c:emit_signal("request::titlebars")
+        else
+            awful.titlebar.hide(c, "top")
+            awful.titlebar.hide(c, "bottom")
+            awful.titlebar.hide(c, "left")
+            awful.titlebar.hide(c, "right")
+        end
+    end
+end
+
+client.connect_signal("property::floating", titlebar_for_floating_client)
+
+-- All floating with titlebar when layout is floating
+for s in screen do
+    for _, t in pairs(s.tags) do
+        t:connect_signal("property::layout", function(tag)
+            if tag.layout.name == "floating" then
+                for _, c in pairs(tag:clients()) do
+                    c:emit_signal("request::titlebars")
+                end
+            else
+                for _, c in pairs(tag:clients()) do
+                    titlebar_for_floating_client(c)
+                end
+            end
+        end)
+    end
+end

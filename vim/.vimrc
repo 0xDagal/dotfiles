@@ -14,14 +14,11 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set nohlsearch
-"set clipboard+=unnamedplus
 
 call plug#begin('~/.vim/plugged') 
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " CoC for Completion
-"Plug 'theprimeagen/vim-be-good', {'do': './install.sh'} "A game to get better 
-"at using vim
 Plug 'mbbill/undotree' "Simple Undotree (yes that's the name of it)
 Plug 'sheerun/vim-polyglot' "Syntax for multiple languages
 Plug 'preservim/nerdtree' "File tree
@@ -72,4 +69,7 @@ nnoremap <silent> <leader>p       :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
+"Leader C to compile my c programs
 nnoremap <silent> <leader>c :! gcc <C-R>% -o <C-R>%<BS><BS><CR>
+"Leader T to toggle a terminal into vim
+nnoremap <leader>t :CocCommand terminal.Destroy <CR>:CocCommand terminal.Toggle<CR>
