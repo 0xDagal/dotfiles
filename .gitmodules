@@ -4,3 +4,6 @@
 [submodule "awesome/.config/awesome/awesome-wm-widgets"]
 	path = awesome/.config/awesome/awesome-wm-widgets
 	url = https://github.com/streetturtle/awesome-wm-widgets
+[submodule "vifm/.config/vifm/colors"]
+	path = vifm/.config/vifm/colors
+	url = https://github.com/vifm/vifm-colors
