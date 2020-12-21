@@ -1,0 +1,6 @@
+[submodule "zsh/scripts"]
+	path = zsh/scripts
+	url = https://github.com/Anth0ny29/ZSH-Powerlevel10k-Script
+[submodule "awesome/.config/awesome/awesome-wm-widgets"]
+	path = awesome/.config/awesome/awesome-wm-widgets
+	url = https://github.com/streetturtle/awesome-wm-widgets
