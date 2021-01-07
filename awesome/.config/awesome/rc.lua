@@ -242,11 +242,11 @@ root.buttons(gears.table.join(
 
 -- {{{ Key bindings
 globalkeys = gears.table.join(
-    awful.key({ }, "XF86AudioMute",      function() awful.spawn("amixer -D pulse sset Master toggle") end,
+    awful.key({ }, "XF86AudioMute",      function() awful.spawn("pulsemixer --toggle-mute") end,
               {description="toggle sound", group="audio"}),
-    awful.key({ }, "XF86AudioRaiseVolume",      function() awful.spawn("amixer -D pulse sset Master 5%+") end,
+    awful.key({ }, "XF86AudioRaiseVolume",      function() awful.spawn("pulsemixer --change-volume +5") end,
               {description="increase volume", group="audio"}),
-    awful.key({ }, "XF86AudioLowerVolume",      function() awful.spawn("amixer -D pulse sset Master 5%-") end,
+    awful.key({ }, "XF86AudioLowerVolume",      function() awful.spawn("pulsemixer --change-volume -5") end,
               {description="decrease volume", group="audio"}),
 
     awful.key({ modkey,        }, "d", function () spotify_shell.launch() end, 
@@ -258,7 +258,8 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioPrev", function () awful.spawn("sp prev") end, 
         {description = "spotify prev", group = "audio"}),
 
-    awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
+    -- awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
+    awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e vifm") end,
               {description="run vifm", group="awesome"}),
     awful.key({ modkey }, "l", function() awful.spawn("slock") end, 
               {description = "lock screen", group = "awesome"}),
@@ -603,6 +604,7 @@ client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_n
 client.border_width=10;
 -- Autostart
 awful.spawn.once("compton --detect-client-opacity -i 1")
+-- awful.spawn.once("picom --experimental-backend")
 awful.spawn.once("nm-applet")
 awful.spawn.with_shell("~/.fehbg &")
 
