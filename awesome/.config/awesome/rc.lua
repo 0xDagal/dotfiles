@@ -258,8 +258,8 @@ globalkeys = gears.table.join(
     awful.key({ }, "XF86AudioPrev", function () awful.spawn("sp prev") end, 
         {description = "spotify prev", group = "audio"}),
 
-    -- awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
-    awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e vifm") end,
+    awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
+    -- awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e vifm") end,
               {description="run vifm", group="awesome"}),
     awful.key({ modkey }, "l", function() awful.spawn("slock") end, 
               {description = "lock screen", group = "awesome"}),
@@ -603,8 +603,8 @@ client.connect_signal("focus", function(c) c.border_color = beautiful.border_foc
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 client.border_width=10;
 -- Autostart
-awful.spawn.once("compton --detect-client-opacity -i 1")
--- awful.spawn.once("picom --experimental-backend")
+-- awful.spawn.once("compton --detect-client-opacity -i 1")
+awful.spawn.once("picom --experimental-backend")
 awful.spawn.once("nm-applet")
 awful.spawn.with_shell("~/.fehbg &")
 
