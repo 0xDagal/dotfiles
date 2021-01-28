@@ -137,6 +137,9 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart
+command! dade dragon-drag-and-drop -x %f
+command! dada dragon-drag-and-drop -a %f
+
 
 " ------------------------------------------------------------------------------
 
@@ -169,28 +172,14 @@ command! reload :write | restart
 " Cisco
 filetype *.pkt,*.pka
         \ {View in Cisco Packet Tracer}
-        \ packettracer
+        \ packettracer &
 " Pdf
-filextype *.pdf zathura %c %i &, apvlv %c, xpdf %c
+filextype *.pdf zathura %c %i &,
 fileviewer *.pdf
         \ vifmimg pdfpreview %px %py %pw %ph %c
         \ %pc
         \ vifmimg clear
         " \ pdftotext -nopgbrk %c -
-
-" PostScript
-filextype *.ps,*.eps,*.ps.gz
-        \ {View in zathura}
-        \ zathura %f,
-        \ {View in gv}
-        \ gv %c %i &,
-
-" Djvu
-filextype *.djvu
-        \ {View in zathura}
-        \ zathura %f,
-        \ {View in apvlv}
-        \ apvlv %f,
 
 " Audio
 filetype *.wav,*.mp3,*.flac,*.m4a,*.wma,*.ape,*.ac3,*.og[agx],*.spx,*.opus
@@ -218,16 +207,12 @@ fileviewer *.avi,*.mp4,*.wmv,*.dat,*.3gp,*.ogv,*.mkv,*.mpg,*.mpeg,*.vob,
 
 " Web
 filextype *.html,*.htm
-        \ {Open with emacs}
-        \ emacsclient -c %c &,
         \ {Open with vim}
         \ vim %c &,
-        \ {Open with dwb}
-        \ dwb %f %i &,
         \ {Open with firefox}
         \ firefox %f &,
-        \ {Open with uzbl}
-        \ uzbl-browser %f %i &,
+        \ {Open with brave}
+        \ brave %f &,
 filetype *.html,*.htm links, lynx
 
 " Object
@@ -238,13 +223,16 @@ filetype *.[1-8] man ./%c
 fileviewer *.[1-8] man ./%c | col -b
 
 " Wireshark
-
 filetype *.pcapng
-        \ wireshark %f
+        \ {Open with wireshark}
+        \ wireshark %f &,
+        \ {Open with tshark}
+        \ tshark %f &,
+
 " Images
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in vimiv}
-        \ vimiv %f
+        \ vimiv %f &
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
         \ vifmimg draw %px %py %pw %ph %c
         \ %pc
@@ -254,11 +242,6 @@ fileviewer *.gif
         \ %pc
         \ vifmimg clear
         
-" OpenRaster
-filextype *.ora
-        \ {Edit in MyPaint}
-        \ mypaint %f,
-
 " Mindmap
 filextype *.vym
         \ {Open with VYM}
@@ -293,67 +276,15 @@ filetype *.asc
 filetype *.torrent ktorrent %f &
 fileviewer *.torrent dumptorrent -v %c
 
-" FuseZipMount
-filetype *.zip,*.jar,*.war,*.ear,*.oxt,*.apkg
-       \ {Mount with fuse-zip}
-       \ FUSE_MOUNT|fuse-zip %SOURCE_FILE %DESTINATION_DIR,
-       \ {View contents}
-       \ zip -sf %c | less,
-       \ {Extract here}
-       \ tar -xf %c,
-fileviewer *.zip,*.jar,*.war,*.ear,*.oxt zip -sf %c
-
-" ArchiveMount
-filetype *.tar,*.tar.bz2,*.tbz2,*.tgz,*.tar.gz,*.tar.xz,*.txz
-       \ {Mount with archivemount}
-       \ FUSE_MOUNT|archivemount %SOURCE_FILE %DESTINATION_DIR,
 fileviewer *.tgz,*.tar.gz tar -tzf %c
 fileviewer *.tar.bz2,*.tbz2 tar -tjf %c
 fileviewer *.tar.txz,*.txz xz --list %c
 fileviewer *.tar tar -tf %c
 
-" Rar2FsMount and rar archives
-filetype *.rar
-       \ {Mount with rar2fs}
-       \ FUSE_MOUNT|rar2fs %SOURCE_FILE %DESTINATION_DIR,
-fileviewer *.rar unrar v %c
-
-" IsoMount
-filetype *.iso
-       \ {Mount with fuseiso}
-       \ FUSE_MOUNT|fuseiso %SOURCE_FILE %DESTINATION_DIR,
-
-" SshMount
-filetype *.ssh
-       \ {Mount with sshfs}
-       \ FUSE_MOUNT2|sshfs %PARAM %DESTINATION_DIR %FOREGROUND,
-
-" FtpMount
-filetype *.ftp
-       \ {Mount with curlftpfs}
-       \ FUSE_MOUNT2|curlftpfs -o ftp_port=-,,disable_eprt %PARAM %DESTINATION_DIR %FOREGROUND,
-
-" Fuse7z and 7z archives
-filetype *.7z
-       \ {Mount with fuse-7z}
-       \ FUSE_MOUNT|fuse-7z %SOURCE_FILE %DESTINATION_DIR,
-fileviewer *.7z 7z l %c
-
 " Office files
 filextype *.odt,*.doc,*.docx,*.xls,*.xlsx,*.odp,*.pptx libreoffice %f &
 fileviewer *.doc catdoc %c
 fileviewer *.docx docx2txt.pl %f -
-
-" TuDu files
-filetype *.tudu tudu -f %c
-
-" Qt projects
-filextype *.pro qtcreator %f &
-
-" Directories
-filextype */
-        \ {View in thunar}
-        \ Thunar %f &,
 
 " Syntax highlighting in preview
 "
@@ -460,7 +391,7 @@ nnoremap cc cw<c-u>
 nnoremap A cw
 
 " Open console in current directory
-nnoremap ,t :!xterm &<cr>
+nnoremap ,t :!alacritty &<cr>
 
 " Open editor to edit vifmrc and apply settings after returning to vifm
 nnoremap ,c :write | edit $MYVIFMRC | restart<cr>

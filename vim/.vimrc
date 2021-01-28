@@ -26,8 +26,13 @@ Plug 'tpope/vim-commentary' "Comment
 "fzf fuzzy finder
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
+Plug 'itchyny/lightline.vim'
 
 call plug#end()
+
+" Lightline
+set laststatus=2
+set noshowmode
 
 " leaderkey mapped to space
 let mapleader = " "
