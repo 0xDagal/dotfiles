@@ -15,6 +15,9 @@ set undofile
 set incsearch
 set nohlsearch
 
+" Copy to clipboard
+vmap <C-c> :!xclip -f -sel clip<CR>
+
 call plug#begin('~/.vim/plugged') 
 
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
