@@ -137,9 +137,10 @@ command! make !!make %a
 command! mkcd :mkdir %a | cd %a
 command! vgrep vim "+grep %a"
 command! reload :write | restart
-command! dade dragon-drag-and-drop -x %f
-command! dada dragon-drag-and-drop -a %f
 
+command! de dragon-drag-and-drop -x %f
+command! da dragon-drag-and-drop -a %f
+command! feh feh --bg-scale %f
 
 " ------------------------------------------------------------------------------
 
@@ -233,6 +234,9 @@ filetype *.pcapng
 filextype *.bmp,*.jpg,*.jpeg,*.png,*.gif,*.xpm
         \ {View in vimiv}
         \ vimiv %f &
+filetype *.svg
+        \ {Open with inkscape}
+        \ inkscape %f &
 fileviewer *.bmp,*.jpg,*.jpeg,*.png,*.xpm
         \ vifmimg draw %px %py %pw %ph %c
         \ %pc
@@ -360,21 +364,14 @@ set vifminfo=dhistory,savedirs,chistory,state,tui,shistory,
 
 " Sample mappings
 
-"Open all images in current directory in sxiv thumbnail mode
-nnoremap sx :!sxiv -t %d & <cr>
-
 "Open selected images in gimp
 nnoremap gp :!gimp %f & <cr>
-
-" Start shell in current directory
-nnoremap s :shell<cr>
 
 " Display sorting dialog
 nnoremap S :sort<cr>
 
 " Toggle visibility of preview window
 nnoremap w :view<cr>
-vnoremap w :view<cr>gv
 
 " Open file in the background using its default program
 nnoremap gb :file &<cr>l

@@ -259,7 +259,6 @@ globalkeys = gears.table.join(
         {description = "spotify prev", group = "audio"}),
 
     awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e ~/.config/vifm/scripts/vifmrun") end,
-    -- awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell("alacritty -e vifm") end,
               {description="run vifm", group="awesome"}),
     awful.key({ modkey }, "l", function() awful.spawn("slock") end, 
               {description = "lock screen", group = "awesome"}),

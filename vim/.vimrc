@@ -4,7 +4,7 @@ set tabstop=2 softtabstop=2
 set shiftwidth=2
 set expandtab
 set smartindent
-set nu
+set nu relativenumber
 set colorcolumn=80
 set nowrap
 set smartcase
@@ -14,6 +14,7 @@ set undodir=~/.vim/undodir
 set undofile
 set incsearch
 set nohlsearch
+set cursorline
 
 " Copy to clipboard
 vmap <C-c> :!xclip -f -sel clip<CR>
