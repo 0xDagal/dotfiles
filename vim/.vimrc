@@ -2,9 +2,15 @@ syntax on
 set noerrorbells
 set tabstop=2 softtabstop=2
 set shiftwidth=2
+set showcmd
 set expandtab
 set smartindent
-set nu relativenumber
+:set number relativenumber
+:augroup numbertoggle
+:  autocmd!
+:  autocmd BufEnter,FocusGained,InsertLeave * set relativenumber
+:  autocmd BufLeave,FocusLost,InsertEnter   * set norelativenumber
+:augroup END
 set colorcolumn=80
 set nowrap
 set smartcase
@@ -15,6 +21,7 @@ set undofile
 set incsearch
 set nohlsearch
 set cursorline
+:nmap <F1> <nop>
 
 " Copy to clipboard
 vmap <C-c> :!xclip -f -sel clip<CR>
@@ -24,13 +31,14 @@ call plug#begin('~/.vim/plugged')
 Plug 'iamcco/markdown-preview.nvim', { 'do': 'cd app && yarn install'  }
 Plug 'neoclide/coc.nvim', {'branch': 'release'} " CoC for Completion
 Plug 'mbbill/undotree' "Simple Undotree (yes that's the name of it)
-Plug 'sheerun/vim-polyglot' "Syntax for multiple languages
+Plug 'vim/killersheep' "Silly game :KillKillKill to play
 Plug 'preservim/nerdtree' "File tree
 Plug 'tpope/vim-commentary' "Comment
 "fzf fuzzy finder
 Plug 'junegunn/fzf', {'dir': '~/.fzf','do': './install --all'}
 Plug 'junegunn/fzf.vim' " needed for previews
 Plug 'itchyny/lightline.vim'
+Plug 'fatih/vim-go', { 'do': ':GoUpdateBinaries' }
 
 call plug#end()
 
@@ -78,7 +86,5 @@ nnoremap <silent> <leader>p       :NERDTreeToggle<CR>
 autocmd StdinReadPre * let s:std_in=1
 autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 
-"Leader C to compile my c programs
-nnoremap <silent> <leader>c :! gcc <C-R>% -o <C-R>%<BS><BS><CR>
 "Leader T to toggle a terminal into vim
 nnoremap <leader>t :CocCommand terminal.Destroy <CR>:CocCommand terminal.Toggle<CR>

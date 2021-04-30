@@ -141,6 +141,8 @@ command! reload :write | restart
 command! de dragon-drag-and-drop -x %f
 command! da dragon-drag-and-drop -a %f
 command! feh feh --bg-scale %f
+command! unzip unzip %f
+command! feh feh --bg-scale %f
 
 " ------------------------------------------------------------------------------
 
