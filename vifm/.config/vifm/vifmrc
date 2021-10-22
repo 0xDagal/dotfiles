@@ -143,6 +143,7 @@ command! da dragon-drag-and-drop -a %f
 command! feh feh --bg-scale %f
 command! unzip unzip %f
 command! feh feh --bg-scale %f
+command! wall rm ~/.config/awesome/themes/powerarrow/wall.png && ln -s %d/%c ~/.config/awesome/themes/powerarrow/wall.png
 
 " ------------------------------------------------------------------------------
 
