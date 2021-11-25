@@ -24,12 +24,13 @@ let g:netrw_liststyle = 3
 let g:netrw_browse_split = 4
 let g:netrw_altv = 1
 let g:netrw_winsize = 25
+" Open netrw with leader p
 nnoremap <leader>p :Vexplore<CR>
 " No F1 help
 nmap <F1> <nop>
 " Copy to clipboard
 vmap <C-c> :!xclip -f -sel clip<CR>
-call plug#begin('~/.vim/plugged') 
+call plug#begin('~/.vim/plugged')  " Use Plug as plugin manager
 Plug 'tpope/vim-commentary' "Handling commentary whatever the language
 Plug 'dradtke/vim-dap' " Debug Adapter Protocol
 Plug 'prabirshrestha/vim-lsp' " Language Server Protocol
@@ -48,6 +49,7 @@ nnoremap <leader>l :wincmd l<CR>
 "Leader t to toggle a terminal into vim
 nnoremap <leader>t :below ter<CR>
 "Tab completion
-inoremap <expr> <Tab>   pumvisible() ? "\<C-n>" : "\<Tab>"
-inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
-inoremap <expr> <cr>    pumvisible() ? asyncomplete#close_popup() : "\<cr>"
+"Deactivate completion by default
+let g:asyncomplete_auto_popup = 0 
+" Use C-t to toggle/untoggle completion
+inoremap <C-t> <esc>:let g:asyncomplete_auto_popup = !g:asyncomplete_auto_popup<CR>a
