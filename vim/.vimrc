@@ -1,22 +1,23 @@
-syntax on "Activate syntax
+syntax on " Activate syntax
 set noerrorbells
-set tabstop=2 "How many spaces when a tab is pressed
-set softtabstop=2 "How many spaces to add at the 
-set shiftwidth=2 "How many spaces when you indent something
-set expandtab "Insert spaces as tab is pressed
+set tabstop=2 " How many spaces when a tab is pressed
+set softtabstop=2 " How many spaces to add at the 
+set shiftwidth=2 " How many spaces when you indent something
+set expandtab " Insert spaces as tab is pressed
 set smartindent
 set number relativenumber " Hybrid number
 set colorcolumn=80
 set nowrap
-set ignorecase "If you put ignorecase and smartcase then it's case sensitive
-set smartcase "only if it has a uppercase letter
+set ignorecase " If you put ignorecase and smartcase then it's case sensitive
+set smartcase " only if it has a uppercase letter
 set noswapfile
 set nobackup
-set undofile "Undo branches are stored in files
+set undofile " Undo branches are stored in files
 set undodir=~/.vim/undodir "Undo files are stored there
-set incsearch "Permit to move to the pattern while searching
-set nohlsearch "Do no highlight all pattern matches
+set incsearch " Permit to move to the pattern while searching
+set nohlsearch " Do no highlight all pattern matches
 set cursorline
+set fdm=syntax " Folding by syntax
 let mapleader = " " " leader key set to  space
 " NerdTree like netrw see https://shapeshed.com/vim-netrw/#nerdtree-like-setup
 let g:netrw_banner = 0
