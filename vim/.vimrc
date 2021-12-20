@@ -30,26 +30,10 @@ nnoremap <leader>p :Vexplore<CR>
 nmap <F1> <nop>
 " Copy to clipboard
 vmap <C-c> :!xclip -f -sel clip<CR>
-call plug#begin('~/.vim/plugged')  " Use Plug as plugin manager
-Plug 'tpope/vim-commentary' "Handling commentary whatever the language
-Plug 'dradtke/vim-dap' " Debug Adapter Protocol
-Plug 'prabirshrestha/vim-lsp' " Language Server Protocol
-Plug 'mattn/vim-lsp-settings' " Auto settings for LSP
-Plug 'prabirshrestha/asyncomplete.vim' " Async autocompletion
-Plug 'prabirshrestha/asyncomplete-lsp.vim' " Async LSP
-Plug 'hrsh7th/vim-vsnip' " Add snippet
-Plug 'hrsh7th/vim-vsnip-integ' " Snippet LSP integration
-Plug 'rafamadriz/friendly-snippets' " Some preconfigured snippets
-call plug#end()
-" some vim windows switching shortcuts
-nnoremap <leader>h :wincmd h<CR>
-nnoremap <leader>j :wincmd j<CR>
-nnoremap <leader>k :wincmd k<CR>
-nnoremap <leader>l :wincmd l<CR>
-"Leader t to toggle a terminal into vim
+" Leader t to toggle a terminal into vim
 nnoremap <leader>t :below ter<CR>
-"Tab completion
-"Deactivate completion by default
+" Tab completion
+"   Deactivate completion by default
 let g:asyncomplete_auto_popup = 0 
 " Use C-t to toggle/untoggle completion
 inoremap <C-t> <esc>:let g:asyncomplete_auto_popup = !g:asyncomplete_auto_popup<CR>a
