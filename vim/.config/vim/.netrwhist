@@ -1,0 +1,12 @@
+let g:netrw_dirhistmax  =10
+let g:netrw_dirhistcnt =2
+let g:netrw_dirhist_2='/home/dagal/.config/vim/pack/packager/start/wal.vim'
+let g:netrw_dirhist_1='/home/dagal/.config/vim/pack/packager/start/wal.vim/colors'
+let g:netrw_dirhist_0='/home/dagal/.config/vim/pack/packager/start/wal.vim'
+let g:netrw_dirhist_9='/home/dagal/.config/zsh'
+let g:netrw_dirhist_8='/home/dagal/.config/vim/pack/autoload'
+let g:netrw_dirhist_7='/home/dagal/.config/vim/pack/plugs/start/asyncomplete.vim/plugin'
+let g:netrw_dirhist_6='/home/dagal/.config/vim/pack/plugs/start/asyncomplete.vim'
+let g:netrw_dirhist_5='/home/dagal/.config/vim/pack/plugs/start/asyncomplete-lsp.vim/plugin'
+let g:netrw_dirhist_4='/home/dagal/.config/vim/pack/plugs/start/asyncomplete-lsp.vim'
+let g:netrw_dirhist_3='/home/dagal/.config/vim/pack/plugs/start'
