@@ -1,0 +1,74 @@
+# 0xDagal config
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+super + Return
+	kitty
+
+# program launcher
+super + r
+  rofi -show run -modi run -theme dmenu
+
+# browser
+super + b
+  brave
+
+# file manager
+super + e
+  kitty -e vifm
+
+# screenshot
+Print
+  flameshot gui
+
+# make sxhkd reload its configuration files
+super + ctrl + r
+	pkill -USR1 -x sxhkd
+
+# sxhk help
+super + s
+  sxhkd-help
+
+# lock screen
+super + ctrl + l
+  slock
+
+#
+# bspwm hotkeys
+# Note that the default node selector is the focused one
+#
+
+# quit/restart bspwm
+super + shift + {q,r}
+	bspc {quit,wm -r}
+
+# close node
+super + shift + c
+	bspc node -c
+
+# send node to desktop n
+super + shift + {1-5}
+  bspc node -d {1-5}
+
+
+# focus desktop n /!\ Not working idk y
+super + {1-5}
+  bspc desktop -f {1-5}
+
+# change node focus
+super + {h,j,k,l}
+  bspc node -f {west,south,north,east}
+
+# swap nodes
+super + shift + {h,j,k,l}
+  bspc node -s {west,south,north,east}
+
+# toggle fullscreen
+super + f
+  bspc node -t '~fullscreen'
+
+# toggle floating
+super + space
+  bspc node -t '~floating'
