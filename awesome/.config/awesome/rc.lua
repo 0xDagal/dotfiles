@@ -60,7 +60,7 @@ run_once({ "picom --experimental-backend", "nm-applet"}) -- comma-separated entr
 
 -- {{{ Variable definitions
 local modkey       = "Mod4"
-local terminal     = "alacritty"
+local terminal     = "kitty"
 local vi_focus     = false -- vi-like client focus https://github.com/lcpz/awesome-copycats/issues/275
 local editor       = os.getenv("EDITOR") or "vim"
 local terminal_run = terminal .. " -e " 
@@ -220,8 +220,8 @@ globalkeys = gears.table.join(
   awful.key({modkey,"Shift"}, "u", function () xrandr.xrandr()  end,
   {description = "multiple monitors handling", group="monitor"}),
 
-  awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell(terminal_run .. "~/.config/vifm/scripts/vifmrun") end,
-  {description="run vifm", group="awesome"}),
+  awful.key({ modkey,           }, "e",      function() awful.spawn.with_shell(terminal_run .. "~/.config/lf/lfrun") end,
+  {description="run lf", group="awesome"}),
   awful.key({ modkey }, "l", function() awful.spawn("slock") end, 
   {description = "lock screen", group = "awesome"}),
 
