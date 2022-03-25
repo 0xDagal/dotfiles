@@ -20,20 +20,16 @@ set cursorline
 let mapleader = " " " leader key set to  space
 set runtimepath+=$XDG_CONFIG_HOME/vim " Vim follow the XDG Base Dir Spec
 set packpath^=$XDG_CONFIG_HOME/vim
-" NerdTree like netrw
-let g:netrw_banner = 0
-let g:netrw_liststyle = 3
-let g:netrw_browse_split = 4
-let g:netrw_altv = 1
-let g:netrw_winsize = 25
+set hidden " permit modification of multiple buffers
+set nrformats+=alpha " increment also alpha with Ctrl+a and dec with Ctrl+x
+" Netrw
+let g:netrw_banner = 0 " No banner
+let g:netrw_liststyle = 3 " Setting nerdtree like style
+let g:netrw_browse_split = 3 " Open in new tab
+let g:netrw_winsize = 25 " Setting size
 " Open netrw with leader p
 nnoremap <leader>p :Vexplore<CR>
 " No F1 help
-nmap <F1> <nop>
+nnoremap <F1> <nop>
 " Copy to clipboard
 vmap <C-c> :!xclip -f -sel clip<CR>
-" Leader t to toggle a terminal into vim
-nnoremap <leader>t :below ter<CR>
-" Plugs are stored in .config/vim/pack as Vim 8 as plugin loader built-in
-" All my remote plugin related confs are in this vimscript file
-source $XDG_CONFIG_HOME/vim/autoload/myconf.vim
