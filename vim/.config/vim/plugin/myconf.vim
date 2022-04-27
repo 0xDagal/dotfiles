@@ -14,6 +14,9 @@ call packager#setup(function('s:packager_init'))
  colorscheme gruvbox
  set background=dark
 
+" File type plugin
+filetype plugin indent on
+
 " Completion
 set completeopt+=menuone
 set completeopt+=noselect
