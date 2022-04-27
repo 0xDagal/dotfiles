@@ -32,4 +32,4 @@ nnoremap <leader>p :Vexplore<CR>
 " No F1 help
 nnoremap <F1> <nop>
 " Copy to clipboard
-vmap <C-c> :!xclip -f -sel clip<CR>
+vmap <C-c> :w !xclip -sel clip<CR><CR>
