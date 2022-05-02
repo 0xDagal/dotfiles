@@ -23,8 +23,10 @@ bindkey -v
 # End of lines configured by zsh-newuser-install
 
 source $ZDOTDIR/zshaliases
-cat ~/.cache/wal/sequences
-eval "$(starship init zsh)"
+
+PROMPT="%F{green}%n%f%F{cyan}@%f%F{yellow}%~%f %# " # User@WorkingDirectoryFromHome $
+RPROMPT="%? %F{magenta}%t%f" # LastExitStatus Time Day
+
+
 
 if [ "$TMUX" = "" ]; then tmux; fi
-
