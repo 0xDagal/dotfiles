@@ -1,15 +1,18 @@
 #!/bin/sh
 
+# Set keyboard layout to fr
+setxkbmap fr &
+# Load wallpaper
+~/.config/feh/fehbg &
+~/restart-ntp.sh &
 # Run Simple X Hotkey Daemon for keybindgs
 pgrep -x sxhkd > /dev/null || sxhkd &
-# Run jonabur's picom for transparency and node switching animations
-picom --experimental-backend &
-# Set Polybar
-polybar example &
-# Set Walpaper and colorscheme
-wal -i ~/Images/initialD/takumi.jpg --saturate 0.9
+# Run Pipewire for sound
+pgrep -x pipewire > /dev/null || pipewire &
+pgrep -x pipewire-pulse > /dev/null || pipewire-pulse &
+pgrep -x trayer > /dev/null || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --tint 0x504945 &
 # BSPWM configuration
-bspc monitor -d 1 2 3 4 5 # Desktops
+bspc monitor -d I II III IV V VI VII VIII IX X
 bspc config border_width         2
 bspc config window_gap          12
 bspc config split_ratio          0.55
