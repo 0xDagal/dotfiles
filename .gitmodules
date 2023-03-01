@@ -1,6 +1,0 @@
-[submodule "zsh/scripts"]
-	path = zsh/scripts
-	url = https://github.com/Anth0ny29/ZSH-Powerlevel10k-Script
-[submodule "vifm/.config/vifm/colors"]
-	path = vifm/.config/vifm/colors
-	url = https://github.com/vifm/vifm-colors
