@@ -1,7 +1,7 @@
 
 # terminal emulator
 super + Return
-	kitty
+	st
 
 # program launcher
 super + r
@@ -11,13 +11,17 @@ super + r
 super + b
     firefox
 
+# date
+super + d
+    notify-date
+
+# date
+super + shift + b
+    notify-battery
+
 # screenshot
 Print
     flameshot gui
-
-# sxhkd helper
-super + s
-    sxhkd-help
 
 # make sxhkd reload its configuration files
 super + ctrl + r
@@ -49,7 +53,7 @@ super + shift + {h,j,k,l}
 
 # toggle fullscreen
 super + f
-    bspc node -t '~fullscreen' && toggle-trayer
+    bspc node -t '~fullscreen'
 
 # toggle floating
 super + space

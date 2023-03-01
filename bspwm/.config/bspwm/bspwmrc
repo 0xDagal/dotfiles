@@ -1,18 +1,32 @@
 #!/bin/sh
 
+# Set Xresources
+xrdb ~/.config/X11/gruvbox-dark.xresources
 # Set keyboard layout to fr
-setxkbmap fr &
+setxkbmap fr
 # Load wallpaper
-~/.config/feh/fehbg &
-~/restart-ntp.sh &
+~/.config/feh/fehbg
 # Run Simple X Hotkey Daemon for keybindgs
 pgrep -x sxhkd > /dev/null || sxhkd &
 # Run Pipewire for sound
 pgrep -x pipewire > /dev/null || pipewire &
 pgrep -x pipewire-pulse > /dev/null || pipewire-pulse &
-pgrep -x trayer > /dev/null || trayer --edge top --align right --SetDockType true --SetPartialStrut true --expand true --transparent true --tint 0x504945 &
+# Run Dunst to receive desktop notifications
+pgrep -x dunst > /dev/null || dunst &
+
 # BSPWM configuration
-bspc monitor -d I II III IV V VI VII VIII IX X
+# 1 or 2 monitors
+nb_monitors=$(xrandr --listactivemonitors | awk '/Monitors: [1-9]/{print $2}')
+
+if [ "$nb_monitors" -eq 2 ]; then
+    bspc wm -O DP-3 eDP-1
+    bspc monitor DP-3 -d 1 2 3 4 5
+    bspc monitor eDP-1 -d 6 7 8 9 10
+else
+    bspc wm -O eDP-1
+    bspc monitor -d 1 2 3 4 5 6 7 8 9 10
+fi
+
 bspc config border_width         2
 bspc config window_gap          12
 bspc config split_ratio          0.55
