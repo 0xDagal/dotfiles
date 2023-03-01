@@ -1,0 +1,33 @@
+syntax on "Activate syntax
+set noerrorbells
+set tabstop=4 "How many spaces when a tab is pressed
+set softtabstop=4 "How many spaces to add at the 
+set shiftwidth=4 "How many spaces when you indent something
+set expandtab "Insert spaces as tab is pressed
+set smartindent
+set number relativenumber " Hybrid number
+set colorcolumn=80
+set nowrap
+set ignorecase "If you put ignorecase and smartcase then it's case sensitive
+set smartcase "only if it has an uppercase letter
+set noswapfile
+set nobackup
+set undofile "Undo branches are stored in files
+set undodir=$XDG_CACHE_HOME/vim/undo " that are stored there
+set incsearch "Permit to move to the pattern while searching
+set nohlsearch "Do no highlight all pattern matches
+set cursorline
+let mapleader = " " " leader key set to  space
+set hidden " permit modification of multiple buffers
+set nrformats+=alpha " increment also alpha with Ctrl+a and dec with Ctrl+x
+set pastetoggle=<F5>
+set lazyredraw " do not redraw while executing macros or other commands not typed
+set autoread " When a file has been detected to have been changed outside of Vim and it has not been changed inside of Vim, automatically read it again.
+" Netrw
+let g:netrw_banner = 0 " No banner
+let g:netrw_liststyle = 3 " Setting nerdtree like style
+let g:netrw_winsize = 25 " Setting size
+let g:netrw_browse_split = 4 " Open in previous window (the editing one)
+" Open netrw with leader p
+nnoremap <leader>f :Lexplore<CR>
+filetype plugin indent on
