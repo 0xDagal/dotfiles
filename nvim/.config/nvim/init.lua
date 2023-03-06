@@ -66,15 +66,21 @@ local plugins = {
     -- LSP
     'neovim/nvim-lspconfig', -- configuration for the built-in LSP client ✔️
     'williamboman/mason-lspconfig.nvim', -- bridge between mason and lspconfig ✔️
-    {"jose-elias-alvarez/null-ls.nvim", -- LSP formatter and linters
+    {"jose-elias-alvarez/null-ls.nvim", -- LSP formatter and linters ✔️
         dependencies = {
-            'nvim-lua/plenary.nvim',
+            'nvim-lua/plenary.nvim', -- ✔️
         }
     },
-    "jay-babu/mason-null-ls.nvim", -- bridge between mason and null-ls
+    "jay-babu/mason-null-ls.nvim", -- bridge between mason and null-ls -- ✔️
     -- DAP
-    -- 'mfussenegger/nvim-dap', -- DAP client ?
-    -- 'jay-babu/mason-nvim-dap.nvim',  -- bridge between mason and nvim-dap ?
+    {"rcarriga/nvim-dap-ui", -- DAP UI -- ✔️
+        dependencies = {
+            'mfussenegger/nvim-dap', -- DAP client ✔️
+            'folke/neodev.nvim', -- init.lua and plugin development ✔️
+        }
+    },
+    'jay-babu/mason-nvim-dap.nvim',  -- bridge between mason and nvim-dap ✔️
+    'theHamsta/nvim-dap-virtual-text',  -- follow changes ?
     -- Utils
     'numToStr/Comment.nvim', -- toggle comments ✔️
     'ibhagwan/fzf-lua', -- fzf with les buffers, LSP, DAP, les tags, git, grep, etc. ✔️
@@ -85,6 +91,7 @@ require('lazy').setup(plugins, opts)
 
 vim.opt.termguicolors = true
 vim.cmd[[colorscheme gruvbox]]
+
 
 require('Comment').setup()
 require('mason').setup()
@@ -103,6 +110,41 @@ require("mason-null-ls").setup({
     automatic_setup = true,
 })
 require 'mason-null-ls'.setup_handlers()
+
+-- DAP
+
+require("neodev").setup({
+  library = { plugins = { "nvim-dap-ui" }, types = true },
+})
+-- Automatically setup installed debug adapters
+require("mason-nvim-dap").setup({
+    automatic_setup = true,
+})
+require 'mason-nvim-dap'.setup_handlers {}
+require("nvim-dap-virtual-text").setup()
+
+-- Use nvim-dap with a UI
+local dap, dapui = require("dap"), require("dapui")
+dapui.setup()
+dap.listeners.after.event_initialized["dapui_config"] = function()
+  dapui.open()
+end
+dap.listeners.before.event_terminated["dapui_config"] = function()
+  dapui.close()
+end
+dap.listeners.before.event_exited["dapui_config"] = function()
+  dapui.close()
+end
+
+vim.keymap.set('n', '<F5>', ":lua require'dap'.continue()<CR>")
+vim.keymap.set('n', '<F10>', ":lua require'dap'.step_over()<CR>")
+vim.keymap.set('n', '<F11>', ":lua require'dap'.step_into()<CR>")
+vim.keymap.set('n', '<F12>', ":lua require'dap'.step_out()<CR>")
+vim.keymap.set('n', '<Leader>b', ":lua require'dap'.toggle_breakpoint()<CR>")
+vim.keymap.set('n', '<Leader>B', ":lua require'dap'.set_breakpoint(vim.fn.input('Breakpoint condition: '))<CR>")
+vim.keymap.set('n', '<Leader>B', ":lua require'dap'.set_breakpoint(nil, nil, vim.fn.input('Log point message: '))<CR>")
+vim.keymap.set('n', '<Leader>dr', ":lua require'dap'.repl.open()<CR>")
+
 -- Setup a keymap for formatting sync, TODO: find a way to always use null-ls and format on save
 --
 vim.api.nvim_create_autocmd('LspAttach', {
@@ -120,3 +162,4 @@ vim.api.nvim_set_keymap('n', '<leader>ft', ':FzfLua tagstack<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>flr', ':FzfLua lsp_references<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>fld', ':FzfLua lsp_workspace_diagnostics<CR>', {})
 vim.api.nvim_set_keymap('n', '<leader>fli', ':FzfLua lsp_implementations<CR>', {})
+
