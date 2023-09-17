@@ -1,4 +1,4 @@
-EDITOR=vim
+EDITOR=nvim
 XINITRC=/home/dagal/.config/X11/xinitrc
 PATH=/usr/local/bin:/bin:/usr/bin:/usr/local/sbin:/usr/sbin:/sbin
 PATH=$PATH:/opt/metasploit-framework/bin:/opt/texlive/2022/bin/x86_64-linux
