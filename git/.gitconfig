@@ -1,0 +1,27 @@
+[user]
+	name = 0xDagal
+	email = tangui.didailler@protonmail.com
+[core]
+    editor = vim
+[init]
+	defaultBranch = main
+[commit]
+    ; gpgsign = true
+[tag]
+    ; gpgsign = true
+[init]
+	defaultBranch = main
+[merge]
+    tool = vimdiff
+    conflicstyle = diff3
+[mergetool]
+    prompt = false
+[mergetool "vimdiff"]
+    layout = "(LOCAL, REMOTE)/MERGED"
+[push]
+    default = current
+[pull]
+	rebase = true
+[alias]
+	pmr = push -o merge_request.create
+	pmrd = push -o merge_request.create -o merge_request.draft
